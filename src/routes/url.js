@@ -16,9 +16,8 @@ router.post('/posturl', async function (req, res, next) {
         });
 });
 
-router.get('/geturl', async function (req, res, next) {
-    const { url } = req.body;
-    const priKey = getLongUrlPK(url);
+router.get('/geturl/:shorturl', async function (req, res, next) {
+    const priKey = getLongUrlPK(req.params["shorturl"]);
 
     db.query("select longurl from urls where urlid = ($1)",
         [priKey], (err, result) => {
