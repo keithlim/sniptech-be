@@ -5,9 +5,9 @@ const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_P
 
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-    // ssl: {
-    //     rejectUnauthorized: false,
-    // },
+    ssl: {
+        rejectUnauthorized: false,
+    },
     connectionTimeoutMillis: 0, // how long to wait if no connections available
     idleTimeoutMillis: 5000 // how long to wait till disconnecting idle connections
 });
