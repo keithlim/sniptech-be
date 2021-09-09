@@ -5,7 +5,7 @@ const { getShortUrl, getLongUrlPK } = require('../method-helper');
 
 router.post('/posturl', async function (req, res, next) {
     const { url } = req.body;
-    const domain = isProduction ? "https://sniptech-be.herokuapp.com/" : "localhost:4200/";
+    const domain = isProduction ? "https://sniptech.herokuapp.com/" : "localhost:4200/";
 
     db.query("SELECT nextval(pg_get_serial_sequence($1, $2))", ['urls', 'urlid'], (err, result) => {
         if (err) {
