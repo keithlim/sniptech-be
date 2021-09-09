@@ -6,7 +6,7 @@ const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_P
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
     ssl: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: false, // comment object out when coding locally
     },
     connectionTimeoutMillis: 0, // how long to wait if no connections available
     idleTimeoutMillis: 5000 // how long to wait till disconnecting idle connections
@@ -21,7 +21,7 @@ pool.on('error', (err, client) => {
 })
 
 pool.on('connect', () => {
-    console.log('Connected to database successfully.');
+    // console.log('Connected to database successfully.');
 });
 
 module.exports = {
@@ -32,5 +32,6 @@ module.exports = {
             // console.log('executed query', { text, duration, rows: res.rowCount })
             callback(err, res)
         });
-    }
+    },
+    isProduction
 }
